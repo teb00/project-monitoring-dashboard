@@ -37,8 +37,8 @@ export interface Kpi {
   label: string;
   value: number;
   display: string;
-  deltaPct: number;
-  positive: boolean;
+  deltaPct: number | null;
+  positive: boolean | null;
   spark: number[];
   accent: string;
   icon: "repo" | "star" | "commit" | "users" | "spark";

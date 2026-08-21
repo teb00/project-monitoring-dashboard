@@ -38,7 +38,7 @@ export function FilterBar({
         />
         <div className="hidden h-5 w-px bg-slate-200 dark:bg-white/10 sm:block" />
         <span className="text-xs font-medium text-slate-400 dark:text-slate-500">
-          Segment
+          Group by
         </span>
         <SegmentedControl<SegmentKey>
           size="sm"
@@ -65,10 +65,9 @@ export function FilterBar({
       <div className="flex items-center justify-between gap-3 lg:justify-end">
         <div className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
           </span>
-          <span className="tnum">Updated {updatedAt}</span>
+          <span className="tnum">Demo data · refreshed {updatedAt}</span>
         </div>
         <button
           type="button"

@@ -80,6 +80,14 @@ function deltaPct(curr: number, prev: number): number {
   return ((curr - prev) / prev) * 100;
 }
 
+function comparableDelta(
+  curr: number,
+  prev: number,
+  hasBaseline: boolean,
+): number | null {
+  return hasBaseline ? deltaPct(curr, prev) : null;
+}
+
 /** Build the five KPI summary cards for the active range. */
 export function computeKpis(range: RangeKey): Kpi[] {
   const d = rangeDays(range);
@@ -88,9 +96,9 @@ export function computeKpis(range: RangeKey): Kpi[] {
     Math.max(0, DAYS_SERIES.length - d * 2),
     DAYS_SERIES.length - d,
   );
+  const hasBaseline = prev.length === d;
 
   const totalStars = PROJECTS.reduce((a, p) => a + p.stars, 0);
-  const gainNow = PROJECTS.reduce((a, p) => a + gainInRange(p, d), 0);
 
   const sparkFrom = (metric: MetricKey, agg: "sum" | "avg" = "sum") => {
     const series = DAYS_SERIES.slice(Math.max(0, DAYS_SERIES.length - 90));
@@ -108,8 +116,8 @@ export function computeKpis(range: RangeKey): Kpi[] {
       label: "Projects tracked",
       value: PROJECTS.length,
       display: String(PROJECTS.length),
-      deltaPct: deltaPct(sumMetric("newRepos", curr), sumMetric("newRepos", prev)),
-      positive: sumMetric("newRepos", curr) >= sumMetric("newRepos", prev),
+      deltaPct: null,
+      positive: null,
       spark: sparkFrom("newRepos"),
       accent: "#6366f1",
       icon: "repo",
@@ -119,8 +127,8 @@ export function computeKpis(range: RangeKey): Kpi[] {
       label: "Total stars",
       value: totalStars,
       display: compactFor(totalStars),
-      deltaPct: (gainNow / (totalStars - gainNow || 1)) * 100,
-      positive: true,
+      deltaPct: null,
+      positive: null,
       spark: resampleNum(
         cumulative(PROJECTS.reduce((a, p) => a + p.gain365, 0)),
         24,
@@ -133,8 +141,8 @@ export function computeKpis(range: RangeKey): Kpi[] {
       label: "New stars",
       value: sumMetric("newStars", curr),
       display: compactFor(sumMetric("newStars", curr)),
-      deltaPct: deltaPct(sumMetric("newStars", curr), sumMetric("newStars", prev)),
-      positive: sumMetric("newStars", curr) >= sumMetric("newStars", prev),
+      deltaPct: comparableDelta(sumMetric("newStars", curr), sumMetric("newStars", prev), hasBaseline),
+      positive: hasBaseline ? sumMetric("newStars", curr) >= sumMetric("newStars", prev) : null,
       spark: sparkFrom("newStars"),
       accent: "#8b5cf6",
       icon: "spark",
@@ -144,8 +152,8 @@ export function computeKpis(range: RangeKey): Kpi[] {
       label: "Commits",
       value: sumMetric("commits", curr),
       display: compactFor(sumMetric("commits", curr)),
-      deltaPct: deltaPct(sumMetric("commits", curr), sumMetric("commits", prev)),
-      positive: sumMetric("commits", curr) >= sumMetric("commits", prev),
+      deltaPct: comparableDelta(sumMetric("commits", curr), sumMetric("commits", prev), hasBaseline),
+      positive: hasBaseline ? sumMetric("commits", curr) >= sumMetric("commits", prev) : null,
       spark: sparkFrom("commits"),
       accent: "#06b6d4",
       icon: "commit",
@@ -155,8 +163,8 @@ export function computeKpis(range: RangeKey): Kpi[] {
       label: "Active contributors",
       value: Math.round(avgMetric("contributors", curr)),
       display: fullFor(Math.round(avgMetric("contributors", curr))),
-      deltaPct: deltaPct(avgMetric("contributors", curr), avgMetric("contributors", prev)),
-      positive: avgMetric("contributors", curr) >= avgMetric("contributors", prev),
+      deltaPct: comparableDelta(avgMetric("contributors", curr), avgMetric("contributors", prev), hasBaseline),
+      positive: hasBaseline ? avgMetric("contributors", curr) >= avgMetric("contributors", prev) : null,
       spark: sparkFrom("contributors", "avg"),
       accent: "#10b981",
       icon: "users",

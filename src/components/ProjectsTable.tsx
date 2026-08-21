@@ -70,7 +70,8 @@ export function ProjectsTable({
       return (
         p.repo.toLowerCase().includes(q) ||
         p.description.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q)
+        p.category.toLowerCase().includes(q) ||
+        p.language.toLowerCase().includes(q)
       );
     });
   }, [rows, query, lang, category, lockedLanguage, lockedCategory]);
@@ -179,6 +180,7 @@ export function ProjectsTable({
               className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400"
             />
             <input
+              aria-label="Search repositories"
               value={query}
               onChange={(e) => handleQueryChange(e.target.value)}
               placeholder="Search repos…"
@@ -186,6 +188,7 @@ export function ProjectsTable({
             />
           </div>
           <select
+            aria-label="Filter by language"
             value={lang}
             onChange={(e) => handleLangChange(e.target.value)}
             className={selectCls}
@@ -198,6 +201,7 @@ export function ProjectsTable({
             ))}
           </select>
           <select
+            aria-label="Filter by category"
             value={category}
             onChange={(e) => handleCategoryChange(e.target.value)}
             className={cn(selectCls, "max-w-[180px]")}
@@ -225,7 +229,6 @@ export function ProjectsTable({
                 return (
                   <th
                     key={h.key}
-                    onClick={() => toggleSort(h.key)}
                     aria-sort={
                       sortKey === h.key
                         ? sortDir === "asc"
@@ -234,14 +237,16 @@ export function ProjectsTable({
                         : "none"
                     }
                     className={cn(
-                      "cursor-pointer select-none whitespace-nowrap px-4 py-2.5 font-semibold transition-colors hover:text-slate-700 dark:hover:text-slate-200",
+                      "select-none whitespace-nowrap px-4 py-2.5 font-semibold transition-colors hover:text-slate-700 dark:hover:text-slate-200",
                       h.align === "right" ? "text-right" : "text-left",
                       active && "text-indigo-600 dark:text-indigo-400",
                     )}
                   >
-                    <span
+                    <button
+                      type="button"
+                      onClick={() => toggleSort(h.key)}
                       className={cn(
-                        "inline-flex items-center gap-1",
+                        "inline-flex items-center gap-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-indigo-400",
                         h.align === "right" && "flex-row-reverse",
                       )}
                     >
@@ -253,7 +258,7 @@ export function ProjectsTable({
                           active ? "opacity-100" : "opacity-25",
                         )}
                       />
-                    </span>
+                    </button>
                   </th>
                 );
               })}
@@ -348,7 +353,7 @@ export function ProjectsTable({
             {paginated.length === 0 && (
               <tr>
                 <td colSpan={6} className="px-4 py-10 text-center text-sm text-slate-400">
-                  No projects match your filters.
+                  No projects match your filters. Try clearing a filter or broadening your search.
                 </td>
               </tr>
             )}

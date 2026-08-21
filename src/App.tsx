@@ -14,7 +14,6 @@ import { ActivityFeed } from "@/components/ActivityFeed";
 import { Insights } from "@/components/Insights";
 import { FadeIn } from "@/components/ui";
 import { useTheme } from "@/hooks/useTheme";
-import { useInterval } from "@/hooks/useInterval";
 import { computeKpis } from "@/data/analytics";
 import type { RangeKey, SegmentKey } from "@/types";
 
@@ -62,7 +61,6 @@ export default function App() {
   const [segment, setSegment] = useState<SegmentKey>("language");
   const [cross, setCross] = useState<CrossFilter | null>(null);
   const [tick, setTick] = useState(0);
-  const [liveBoost, setLiveBoost] = useState({ stars: 0, commits: 0 });
   const [updatedAt, setUpdatedAt] = useState(() =>
     new Date().toLocaleTimeString([], {
       hour: "2-digit",
@@ -76,24 +74,9 @@ export default function App() {
     setCross(null);
   }, [range, segment]);
 
-  // Simulate live activity nudging the headline KPIs.
-  useInterval(() => {
-    setLiveBoost((b) => ({
-      stars: b.stars + 30 + Math.floor(Math.random() * 120),
-      commits: b.commits + 25 + Math.floor(Math.random() * 95),
-    }));
-  }, 4200);
-
   const kpis = useMemo(() => {
-    const base = computeKpis(range);
-    return base.map((k) =>
-      k.id === "newStars"
-        ? { ...k, value: k.value + liveBoost.stars }
-        : k.id === "commits"
-          ? { ...k, value: k.value + liveBoost.commits }
-          : k,
-    );
-  }, [range, liveBoost]);
+    return computeKpis(range);
+  }, [range]);
 
   const handleRefresh = () => {
     setTick((t) => t + 1);
@@ -146,9 +129,9 @@ export default function App() {
         </FadeIn>
         <KpiGrid key={`${range}-${tick}`} kpis={kpis} />
 
-        {/* Live pulse */}
+        {/* Simulated pulse */}
         <FadeIn delay={0.05}>
-          <SectionLabel>Live pulse</SectionLabel>
+          <SectionLabel>Pulse preview</SectionLabel>
         </FadeIn>
         <div className="grid gap-4 xl:grid-cols-3">
           <FadeIn delay={0.05}>
@@ -227,7 +210,7 @@ export default function App() {
 
         <footer className="flex flex-col items-center justify-between gap-2 border-t border-slate-200/70 pt-5 text-xs text-slate-400 dark:border-white/[0.06] dark:text-slate-500 sm:flex-row">
           <p>
-            RepoRadar · A live analytics dashboard for{" "}
+            RepoRadar · An analytics dashboard for{" "}
             <span className="font-medium text-slate-500 dark:text-slate-400">
               computer-systems projects
             </span>{" "}

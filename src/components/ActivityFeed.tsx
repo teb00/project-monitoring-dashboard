@@ -52,10 +52,10 @@ export function ActivityFeed() {
           </span>
           <div>
             <h3 className="text-sm font-semibold tracking-tight text-slate-800 dark:text-slate-100">
-              Live activity
+              Simulated activity
             </h3>
             <p className="text-xs text-slate-400 dark:text-slate-500">
-              Streaming events across tracked repos
+              A preview of events across tracked repos
             </p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export function ActivityFeed() {
               className={`relative inline-flex h-2 w-2 rounded-full ${paused ? "bg-slate-400" : "bg-emerald-400"}`}
             />
           </span>
-          {paused ? "Paused" : "Live"}
+          {paused ? "Paused" : "Auto"}
         </button>
       </div>
 

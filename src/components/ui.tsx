@@ -345,9 +345,16 @@ export function TrendChip({
   delta,
   className,
 }: {
-  delta: number;
+  delta: number | null;
   className?: string;
 }) {
+  if (delta === null) {
+    return (
+      <span className={cn("rounded-md bg-slate-100 px-1.5 py-0.5 text-xs font-medium text-slate-400 dark:bg-white/[0.06] dark:text-slate-500", className)}>
+        No baseline
+      </span>
+    );
+  }
   const up = delta >= 0;
   return (
     <span
