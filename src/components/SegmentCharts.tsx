@@ -53,6 +53,7 @@ export function DonutSegmentChart({
   });
 
   const active = hover != null ? arcs[hover] : null;
+  const segmentPlural = segment === "language" ? "languages" : "categories";
   const cx = 100;
   const cy = 100;
 
@@ -82,6 +83,9 @@ export function DonutSegmentChart({
                 <motion.path
                   key={a.key}
                   d={describeArc(cx, cy, isHover ? 78 : 72, a.start, a.end)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${a.label}: ${compact(a.value)} new stars, ${(a.frac * 100).toFixed(1)} percent`}
                   fill="none"
                   stroke={a.color}
                   strokeWidth={isHover ? 24 : 20}
@@ -92,6 +96,12 @@ export function DonutSegmentChart({
                   onMouseEnter={() => setHover(a.index)}
                   onMouseLeave={() => setHover(null)}
                   onClick={() => onPick?.(a.key)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      onPick?.(a.key);
+                    }
+                  }}
                 />
               );
             })}
@@ -120,7 +130,7 @@ export function DonutSegmentChart({
                   {compact(total)}
                 </span>
                 <span className="text-[11px] text-slate-400 dark:text-slate-500">
-                  {slices.length} {segment}s
+                  {slices.length} {segmentPlural}
                 </span>
               </>
             )}
@@ -129,7 +139,7 @@ export function DonutSegmentChart({
 
         {/* legend */}
         <div className="grid w-full grid-cols-1 gap-1 sm:max-h-[200px] sm:overflow-y-auto sm:pr-1">
-          {arcs.slice(0, 9).map((a) => {
+          {arcs.map((a) => {
             const isHover = hover === a.index;
             return (
               <button
@@ -194,10 +204,11 @@ export function BarSegmentChart({
     forks: "Forks",
     contributors: "Contributors",
   };
+  const segmentPlural = segment === "language" ? "languages" : "categories";
 
   return (
     <ChartCard
-      title={`Top ${segment}s`}
+      title={`Top ${segmentPlural}`}
       subtitle={`${metricLabel[metric]} · ${segment} view`}
       icon="layers"
       right={

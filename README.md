@@ -39,6 +39,7 @@ This repository is currently a polished, self-contained demo. The interface is h
 - **Project landscape** with a responsive bubble chart and segment comparison.
 - **Repository explorer** with search, language/category filters, sorting, pagination, growth sparklines, and GitHub links.
 - **Cross-filtering** between visualizations and the repository table.
+- **Shareable views** with range and grouping state preserved in the URL.
 - **Dark mode**, reduced-motion support, keyboard-friendly table sorting, and accessible form labels.
 - **Deterministic data generation**, which keeps screenshots and local development reproducible.
 

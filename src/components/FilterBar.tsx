@@ -8,6 +8,8 @@ export function FilterBar({
   onRangeChange,
   onSegmentChange,
   onRefresh,
+  onShare,
+  shareLabel,
   updatedAt,
   crossLabel,
   onClearCross,
@@ -17,6 +19,8 @@ export function FilterBar({
   onRangeChange: (r: RangeKey) => void;
   onSegmentChange: (s: SegmentKey) => void;
   onRefresh: () => void;
+  onShare: () => void;
+  shareLabel: string;
   updatedAt: string;
   crossLabel?: string | null;
   onClearCross?: () => void;
@@ -69,14 +73,24 @@ export function FilterBar({
           </span>
           <span className="tnum">Demo data · refreshed {updatedAt}</span>
         </div>
-        <button
-          type="button"
-          onClick={onRefresh}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50 active:scale-[0.97] dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:bg-white/[0.07]"
-        >
-          <Icon name="refresh" className="h-3.5 w-3.5" strokeWidth={2.2} />
-          Refresh
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onShare}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-2.5 py-1.5 text-xs font-medium text-indigo-700 transition-colors hover:bg-indigo-100 active:scale-[0.97] dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-300 dark:hover:bg-indigo-500/20"
+          >
+            <Icon name="link" className="h-3.5 w-3.5" strokeWidth={2.2} />
+            {shareLabel}
+          </button>
+          <button
+            type="button"
+            onClick={onRefresh}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50 active:scale-[0.97] dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:bg-white/[0.07]"
+          >
+            <Icon name="refresh" className="h-3.5 w-3.5" strokeWidth={2.2} />
+            Refresh
+          </button>
+        </div>
       </div>
     </div>
   );

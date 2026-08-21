@@ -498,7 +498,6 @@ export interface ActivityEvent {
   langColor: string;
   ts: number;
 }
-let _evId = 1;
 const _kinds: ActivityKind[] = [
   "star",
   "star",
@@ -508,20 +507,19 @@ const _kinds: ActivityKind[] = [
   "newrepo",
   "issue",
 ];
-export function makeActivityEvent(): ActivityEvent {
-  const p = PROJECTS[Math.floor(Math.random() * PROJECTS.length)];
-  const kind = _kinds[Math.floor(Math.random() * _kinds.length)];
+export function makeActivityEvent(sequence = 0): ActivityEvent {
+  const projectIndex = (sequence * 7 + 3) % PROJECTS.length;
+  const p = PROJECTS[projectIndex];
+  const kind = _kinds[sequence % _kinds.length];
   let text = "";
-  if (kind === "star") text = `+${20 + Math.floor(Math.random() * 220)} stars`;
-  else if (kind === "fork") text = `+${1 + Math.floor(Math.random() * 12)} forks`;
+  if (kind === "star") text = `+${32 + ((sequence * 37) % 188)} stars`;
+  else if (kind === "fork") text = `+${2 + ((sequence * 5) % 11)} forks`;
   else if (kind === "release")
-    text = `shipped v${1 + Math.floor(Math.random() * 5)}.${Math.floor(
-      Math.random() * 9,
-    )}.${Math.floor(Math.random() * 9)}`;
+    text = `shipped v${1 + (sequence % 5)}.${(sequence * 3) % 9}.${(sequence * 5) % 9}`;
   else if (kind === "newrepo") text = `new project discovered`;
-  else text = `${1 + Math.floor(Math.random() * 14)} issues opened`;
+  else text = `${2 + ((sequence * 3) % 13)} issues opened`;
   return {
-    id: _evId++,
+    id: sequence,
     kind,
     repo: p.repo,
     owner: p.owner,
@@ -534,7 +532,7 @@ export function makeActivityEvent(): ActivityEvent {
 export function seedActivityEvents(n: number): ActivityEvent[] {
   const out: ActivityEvent[] = [];
   for (let i = 0; i < n; i++) {
-    const e = makeActivityEvent();
+    const e = makeActivityEvent(i);
     e.ts = Date.now() - i * 2600;
     out.push(e);
   }

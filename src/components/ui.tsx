@@ -67,6 +67,12 @@ const PATHS: Record<string, ReactNode> = {
       <path d="M21 3v6h-6" />
     </>
   ),
+  link: (
+    <>
+      <path d="M10 13a5 5 0 0 0 7.07.07l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15" />
+      <path d="M14 11a5 5 0 0 0-7.07-.07l-2 2A5 5 0 0 0 7 20l1.15-1.15" />
+    </>
+  ),
   external: (
     <>
       <path d="M15 3h6v6" />

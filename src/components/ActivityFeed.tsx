@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Card, Icon } from "./ui";
 import { useInterval } from "@/hooks/useInterval";
@@ -32,12 +32,15 @@ export function ActivityFeed() {
   const [events, setEvents] = useState<ActivityEvent[]>(() =>
     seedActivityEvents(7),
   );
+  const sequenceRef = useRef(7);
   const [paused, setPaused] = useState(false);
   const [now, setNow] = useState(() => Date.now());
 
   useInterval(
     () => {
-      setEvents((prev) => [makeActivityEvent(), ...prev].slice(0, 9));
+      const sequence = sequenceRef.current;
+      sequenceRef.current += 1;
+      setEvents((prev) => [makeActivityEvent(sequence), ...prev].slice(0, 9));
     },
     paused ? null : 2600,
   );

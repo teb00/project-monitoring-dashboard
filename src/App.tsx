@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { FilterBar } from "@/components/FilterBar";
@@ -14,13 +14,9 @@ import { ActivityFeed } from "@/components/ActivityFeed";
 import { Insights } from "@/components/Insights";
 import { FadeIn } from "@/components/ui";
 import { useTheme } from "@/hooks/useTheme";
+import { useDashboardQuery } from "@/hooks/useDashboardQuery";
 import { computeKpis } from "@/data/analytics";
-import type { RangeKey, SegmentKey } from "@/types";
-
-interface CrossFilter {
-  seg: SegmentKey;
-  value: string;
-}
+import type { SegmentKey } from "@/types";
 
 const SEG_LABEL: Record<SegmentKey, string> = {
   language: "Language",
@@ -57,10 +53,17 @@ function Aurora() {
 
 export default function App() {
   const { isDark, toggle } = useTheme();
-  const [range, setRange] = useState<RangeKey>("30D");
-  const [segment, setSegment] = useState<SegmentKey>("language");
-  const [cross, setCross] = useState<CrossFilter | null>(null);
+  const {
+    range,
+    segment,
+    cross,
+    setRange,
+    setSegment,
+    setCross,
+  } = useDashboardQuery();
   const [tick, setTick] = useState(0);
+  const [isCopied, setIsCopied] = useState(false);
+  const [shareFailed, setShareFailed] = useState(false);
   const [updatedAt, setUpdatedAt] = useState(() =>
     new Date().toLocaleTimeString([], {
       hour: "2-digit",
@@ -68,11 +71,6 @@ export default function App() {
       second: "2-digit",
     }),
   );
-
-  // Clear any cross-filter when the global filters change.
-  useEffect(() => {
-    setCross(null);
-  }, [range, segment]);
 
   const kpis = useMemo(() => {
     return computeKpis(range);
@@ -89,13 +87,32 @@ export default function App() {
     );
   };
 
+  const handleShare = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(window.location.href);
+      } else {
+        throw new Error("Clipboard API unavailable");
+      }
+      setShareFailed(false);
+      setIsCopied(true);
+      window.setTimeout(() => setIsCopied(false), 1800);
+    } catch {
+      setIsCopied(false);
+      setShareFailed(true);
+      window.setTimeout(() => setShareFailed(false), 1800);
+    }
+  };
+
   const pickDonut = (value: string) =>
-    setCross((c) =>
-      c && c.value === value ? null : { seg: segment, value },
+    setCross(
+      cross && cross.seg === segment && cross.value === value
+        ? null
+        : { seg: segment, value },
     );
   const pickBubble = (category: string) =>
-    setCross((c) =>
-      c && c.seg === "category" && c.value === category
+    setCross(
+      cross && cross.seg === "category" && cross.value === category
         ? null
         : { seg: "category", value: category },
     );
@@ -118,6 +135,10 @@ export default function App() {
             onSegmentChange={setSegment}
             onRefresh={handleRefresh}
             updatedAt={updatedAt}
+            onShare={handleShare}
+            shareLabel={
+              isCopied ? "Copied" : shareFailed ? "Copy unavailable" : "Share view"
+            }
             crossLabel={crossLabel}
             onClearCross={() => setCross(null)}
           />
