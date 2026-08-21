@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">RepoRadar dashboard preview</title>
+  <desc id="desc">A dark analytics dashboard preview with KPI cards, trend lines, a heatmap, and a repository table.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080d1b"/>
+      <stop offset="1" stop-color="#111d35"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="0.55" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="760" fill="url(#bg)"/>
+  <circle cx="90" cy="0" r="330" fill="#6366f1" opacity="0.12"/>
+  <circle cx="1390" cy="330" r="300" fill="#06b6d4" opacity="0.09"/>
+  <rect x="52" y="38" width="1336" height="684" rx="24" fill="#0c1426" stroke="#263553" filter="url(#shadow)"/>
+  <rect x="52" y="38" width="1336" height="72" rx="24" fill="#0a1120"/>
+  <rect x="52" y="86" width="1336" height="24" fill="#0a1120"/>
+  <rect x="82" y="57" width="38" height="38" rx="11" fill="url(#brand)"/>
+  <path d="m92 80 8-9 6 6 11-13" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="134" y="75" fill="#f8fafc" font-family="Arial, sans-serif" font-size="20" font-weight="700">RepoRadar</text>
+  <text x="134" y="94" fill="#7f8da8" font-family="Arial, sans-serif" font-size="11">Discovery radar for computer-systems projects on GitHub</text>
+  <rect x="1052" y="58" width="180" height="34" rx="9" fill="#111c31" stroke="#2a3c5f"/>
+  <circle cx="1072" cy="75" r="6" fill="#06b6d4"/>
+  <text x="1087" y="80" fill="#b5c2d9" font-family="Arial, sans-serif" font-size="12">Search repositories</text>
+  <rect x="1252" y="58" width="106" height="34" rx="9" fill="#17223a" stroke="#2a3c5f"/>
+  <text x="1272" y="80" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="12">GitHub ↗</text>
+  <text x="82" y="141" fill="#8594af" font-family="Arial, sans-serif" font-size="11">FILTERS</text>
+  <rect x="140" y="124" width="236" height="34" rx="9" fill="#17223a" stroke="#34496e"/>
+  <text x="156" y="146" fill="#f8fafc" font-family="Arial, sans-serif" font-size="12">7D    30D    90D    1Y</text>
+  <text x="400" y="141" fill="#8594af" font-family="Arial, sans-serif" font-size="11">GROUP BY</text>
+  <rect x="474" y="124" width="170" height="34" rx="9" fill="#17223a" stroke="#34496e"/>
+  <text x="492" y="146" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="12">Language    Category</text>
+  <text x="1110" y="141" fill="#d6a74a" font-family="Arial, sans-serif" font-size="11">DEMO DATA · REFRESHED 14:32</text>
+  <g>
+    <rect x="82" y="181" width="248" height="106" rx="14" fill="#101a2f" stroke="#263a5f"/>
+    <rect x="348" y="181" width="248" height="106" rx="14" fill="#101a2f" stroke="#263a5f"/>
+    <rect x="614" y="181" width="248" height="106" rx="14" fill="#101a2f" stroke="#263a5f"/>
+    <rect x="880" y="181" width="248" height="106" rx="14" fill="#101a2f" stroke="#263a5f"/>
+    <rect x="1146" y="181" width="212" height="106" rx="14" fill="#101a2f" stroke="#263a5f"/>
+    <g fill="#8190ad" font-family="Arial, sans-serif" font-size="11">
+      <text x="100" y="209">PROJECTS TRACKED</text><text x="366" y="209">TOTAL STARS</text><text x="632" y="209">NEW STARS</text><text x="898" y="209">COMMITS</text><text x="1164" y="209">CONTRIBUTORS</text>
+    </g>
+    <g fill="#f8fafc" font-family="Arial, sans-serif" font-size="30" font-weight="700">
+      <text x="100" y="246">60</text><text x="366" y="246">1.2M</text><text x="632" y="246">42.8K</text><text x="898" y="246">18.4K</text><text x="1164" y="246">9.8K</text>
+    </g>
+    <g stroke-linecap="round" fill="none" stroke-width="3">
+      <path d="M100 268 C140 252 168 270 204 255 S270 250 312 260" stroke="#6366f1"/><path d="M366 268 C410 260 442 264 475 245 S535 259 578 239" stroke="#f59e0b"/><path d="M632 268 C675 258 704 268 738 247 S805 255 844 236" stroke="#8b5cf6"/><path d="M898 268 C935 250 975 258 1012 240 S1085 246 1110 229" stroke="#06b6d4"/><path d="M1164 268 C1205 258 1235 252 1270 239 S1320 246 1340 232" stroke="#10b981"/>
+    </g>
+  </g>
+  <rect x="82" y="314" width="796" height="190" rx="14" fill="#101a2f" stroke="#263a5f"/>
+  <text x="104" y="344" fill="#f8fafc" font-family="Arial, sans-serif" font-size="15" font-weight="700">Activity trend</text>
+  <text x="104" y="363" fill="#8190ad" font-family="Arial, sans-serif" font-size="11">Daily stars, commits, and project discovery</text>
+  <line x1="110" y1="466" x2="850" y2="466" stroke="#253653"/>
+  <line x1="110" y1="414" x2="850" y2="414" stroke="#1b2a45"/>
+  <path d="M110 458 C172 445 197 450 244 430 S325 448 370 411 S445 430 494 397 S565 420 616 380 S700 404 744 366 S814 380 850 346" fill="none" stroke="#06b6d4" stroke-width="4"/>
+  <path d="M110 474 C170 464 215 472 264 454 S348 465 396 443 S480 452 530 424 S610 443 655 414 S735 429 790 397 S830 406 850 388" fill="none" stroke="#8b5cf6" stroke-width="3" opacity="0.9"/>
+  <rect x="900" y="314" width="458" height="190" rx="14" fill="#101a2f" stroke="#263a5f"/>
+  <text x="922" y="344" fill="#f8fafc" font-family="Arial, sans-serif" font-size="15" font-weight="700">Commit pulse</text>
+  <text x="922" y="363" fill="#8190ad" font-family="Arial, sans-serif" font-size="11">The last year at a glance</text>
+  <g opacity="0.9">
+    <rect x="924" y="389" width="14" height="14" rx="3" fill="#173b35"/><rect x="944" y="389" width="14" height="14" rx="3" fill="#226d4c"/><rect x="964" y="389" width="14" height="14" rx="3" fill="#36a269"/><rect x="984" y="389" width="14" height="14" rx="3" fill="#5bd38b"/><rect x="1004" y="389" width="14" height="14" rx="3" fill="#173b35"/>
+    <rect x="924" y="409" width="14" height="14" rx="3" fill="#226d4c"/><rect x="944" y="409" width="14" height="14" rx="3" fill="#5bd38b"/><rect x="964" y="409" width="14" height="14" rx="3" fill="#36a269"/><rect x="984" y="409" width="14" height="14" rx="3" fill="#173b35"/><rect x="1004" y="409" width="14" height="14" rx="3" fill="#226d4c"/>
+    <rect x="924" y="429" width="14" height="14" rx="3" fill="#5bd38b"/><rect x="944" y="429" width="14" height="14" rx="3" fill="#36a269"/><rect x="964" y="429" width="14" height="14" rx="3" fill="#226d4c"/><rect x="984" y="429" width="14" height="14" rx="3" fill="#5bd38b"/><rect x="1004" y="429" width="14" height="14" rx="3" fill="#173b35"/>
+  </g>
+  <text x="1042" y="412" fill="#d9e2f1" font-family="Arial, sans-serif" font-size="13" font-weight="700">18.4K commits</text>
+  <text x="1042" y="433" fill="#8190ad" font-family="Arial, sans-serif" font-size="11">Activity clusters stay visible</text>
+  <rect x="82" y="531" width="1276" height="158" rx="14" fill="#101a2f" stroke="#263a5f"/>
+  <text x="104" y="562" fill="#f8fafc" font-family="Arial, sans-serif" font-size="15" font-weight="700">Tracked repositories</text>
+  <text x="104" y="581" fill="#8190ad" font-family="Arial, sans-serif" font-size="11">60 projects · sort, filter, compare, explore</text>
+  <line x1="104" y1="603" x2="1336" y2="603" stroke="#263a5f"/>
+  <g fill="#8392ab" font-family="Arial, sans-serif" font-size="10" font-weight="700"><text x="104" y="622">REPOSITORY</text><text x="570" y="622">CATEGORY</text><text x="840" y="622">STARS</text><text x="1000" y="622">FORKS</text><text x="1160" y="622">GROWTH · 30D</text></g>
+  <g fill="#dce5f2" font-family="Arial, sans-serif" font-size="12"><text x="104" y="650">torvalds/linux</text><text x="570" y="650">Operating Systems</text><text x="840" y="650">173K</text><text x="1000" y="650">55K</text><text x="1160" y="650">+8.4%</text></g>
+  <g fill="#7f8da8" font-family="Arial, sans-serif" font-size="11"><text x="104" y="672">rust-lang/rust</text><text x="570" y="672">Compilers &amp; Runtimes</text><text x="840" y="672">97K</text><text x="1000" y="672">26K</text><text x="1160" y="672">+6.9%</text></g>
+</svg>
