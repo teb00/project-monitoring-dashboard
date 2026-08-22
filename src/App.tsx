@@ -12,6 +12,7 @@ import { Streamgraph } from "@/components/Streamgraph";
 import { BubbleChart } from "@/components/BubbleChart";
 import { ActivityFeed } from "@/components/ActivityFeed";
 import { Insights } from "@/components/Insights";
+import { LiveDiscovery } from "@/components/LiveDiscovery";
 import { FadeIn } from "@/components/ui";
 import { useTheme } from "@/hooks/useTheme";
 import { useDashboardQuery } from "@/hooks/useDashboardQuery";
@@ -142,6 +143,10 @@ export default function App() {
             crossLabel={crossLabel}
             onClearCross={() => setCross(null)}
           />
+        </FadeIn>
+
+        <FadeIn delay={0.04}>
+          <LiveDiscovery />
         </FadeIn>
 
         {/* KPI summary */}

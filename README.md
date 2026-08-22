@@ -27,7 +27,7 @@ GitHub has no shortage of repositories. The difficult part is seeing the shape o
 
 RepoRadar turns that exploration problem into a single, scan-friendly workspace. It is designed for engineers, technical founders, researchers, and curious builders who want a fast read on the computer-systems landscape without opening dozens of repository tabs.
 
-This repository is currently a polished, self-contained demo. The interface is honest about that: the dataset is deterministic and simulated, so the dashboard is excellent for product exploration and frontend development without pretending to be a live GitHub integration.
+This repository combines a polished deterministic analytics demo with a separate live discovery surface. Live discovery uses GitHub's public Search API without requiring a token; the historical charts remain simulated until a server-side collector and durable snapshots are introduced.
 
 ## What is inside
 
@@ -40,6 +40,8 @@ This repository is currently a polished, self-contained demo. The interface is h
 - **Repository explorer** with search, language/category filters, sorting, pagination, growth sparklines, and GitHub links.
 - **Cross-filtering** between visualizations and the repository table.
 - **Shareable views** with range and grouping state preserved in the URL.
+- **Live discovery** using the public GitHub Search API, with retry and rate-limit states.
+- **Favorites and CSV export** for live search results, stored locally without credentials.
 - **Dark mode**, reduced-motion support, keyboard-friendly table sorting, and accessible form labels.
 - **Deterministic data generation**, which keeps screenshots and local development reproducible.
 
@@ -117,9 +119,9 @@ The demo contains a curated set of real computer-systems repositories and genera
 - **365 daily points** for stars, commits, new repositories, and contributors.
 - **Repository metadata** including language, category, stars, forks, contributors, and growth bias.
 - **Seeded random generation** so the same inputs produce the same dashboard state.
-- **No credentials and no network calls** are required to run the current version.
+- **No credentials** are required; live discovery uses GitHub's public API and is subject to its anonymous rate limit.
 
-The simulated activity panel is intentionally labeled in the UI. It previews how a live event stream could feel without claiming that it is connected to GitHub.
+The simulated activity panel is intentionally labeled in the UI. It previews how a live event stream could feel without claiming that it is connected to GitHub. Live repository discovery is clearly separated and reports API errors and remaining request budget when available.
 
 ## Roadmap
 

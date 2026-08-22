@@ -73,6 +73,13 @@ const PATHS: Record<string, ReactNode> = {
       <path d="M14 11a5 5 0 0 0-7.07-.07l-2 2A5 5 0 0 0 7 20l1.15-1.15" />
     </>
   ),
+  download: (
+    <>
+      <path d="M12 3v12" />
+      <path d="m7 10 5 5 5-5" />
+      <path d="M4 21h16" />
+    </>
+  ),
   external: (
     <>
       <path d="M15 3h6v6" />
